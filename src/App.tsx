@@ -1,6 +1,43 @@
 import React, { FC } from "react";
+import { Form, Input, Button } from "antd";
+import { LockOutlined } from "@ant-design/icons";
+import "./login.css";
 
-const App: FC = () => {
-  return <div>hello world</div>;
+interface Props {
+  form: any;
+}
+
+const NormalLoginForm: FC<Props> = () => {
+  const onFinish = (values: any) => {
+    console.log("Received values of form: ", values);
+  };
+
+  return (
+    <div className="login-page">
+      <Form
+        name="normal_login"
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+      >
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: "请输入登陆密码!" }]}
+        >
+          <Input
+            prefix={<LockOutlined />}
+            type="password"
+            placeholder="请输入登陆密码！"
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            登陆
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
 };
-export default App;
+
+export default NormalLoginForm;
