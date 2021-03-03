@@ -1,15 +1,19 @@
-import React from 'react'
-import { HashRouter, Switch, Route } from 'react-router-dom'
-import loginForm from './Pages/Login'
+import React, { FC } from "react";
+import { HashRouter, Switch, Route } from "react-router-dom";
+import HomePage from "./Home";
+import loginForm from "./Pages/Login";
 
-export default ()=>{
-  return(
+const App: FC = () => {
+  return (
     <div>
       <HashRouter>
         <Switch>
-          <Route path='/login' component={loginForm} />
+          <Route path="/" component={HomePage} />
+          <Route path="/login" component={loginForm} />
         </Switch>
       </HashRouter>
     </div>
-  )
-}
+  );
+};
+
+export default App;
