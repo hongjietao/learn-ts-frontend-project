@@ -1,4 +1,4 @@
-import axios from "axios";
+import request from "../../request";
 import qs from "qs";
 import React, { FC, useState } from "react";
 import { Form, Input, Button, message } from "antd";
@@ -17,7 +17,7 @@ const LoginForm: FC<Props> = () => {
   const [state, setState] = useState<{ isLogin: boolean }>({ isLogin: false });
   const onFinish = (values: FormFields) => {
     if (values.password) {
-      axios
+      request
         .post(
           "/api/login",
           qs.stringify({
@@ -30,7 +30,8 @@ const LoginForm: FC<Props> = () => {
           }
         )
         .then((res) => {
-          if (res.data?.data) {
+          const data = res.data
+          if ( data) {
             setState({
               isLogin: true,
             });

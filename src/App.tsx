@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
-import HomePage from "./Home";
+import HomePage from "./Pages/Home";
 import LoginForm from "./Pages/Login";
 
 const App: FC = () => {
