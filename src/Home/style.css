@@ -1,12 +1,13 @@
-.home-page{
-  width: 300px;
+.home-page {
+  padding: 100px 50px;
+}
+
+.home-page .buttons{
   padding: 10px;
-  margin: 100px auto;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  margin: 30px auto;
   display: flex;
   justify-content: center;
 } 
 .home-page .ant-btn {
-  margin:0 15px;
+  margin:0 10px;
 }
