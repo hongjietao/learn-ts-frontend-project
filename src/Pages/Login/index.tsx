@@ -1,22 +1,50 @@
-import React, { FC } from "react";
-import { Form, Input, Button } from "antd";
+import axios from "axios";
+import qs from "qs";
+import React, { FC, useState } from "react";
+import { Form, Input, Button, message } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import "./style.css";
+import { Redirect } from "react-router-dom";
 
 interface Props {
   form: FormFields;
 }
- 
-interface FormFields{
-  password: string 
+interface FormFields {
+  password: string;
 }
 
-const loginForm: FC<Props> = () => {
+const LoginForm: FC<Props> = () => {
+  const [state, setState] = useState<{ isLogin: boolean }>({ isLogin: false });
   const onFinish = (values: FormFields) => {
-    console.log("Received values of form: ", values);
+    if (values.password) {
+      axios
+        .post(
+          "/api/login",
+          qs.stringify({
+            password: values.password,
+          }),
+          {
+            headers: {
+              "Content-type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data?.data) {
+            setState({
+              isLogin: true,
+            });
+          } else {
+            message.error(res.data.errMsg);
+          }
+        });
+    }
+    // console.log("Received values of form: ", values);
   };
 
-  return (
+  return state.isLogin ? (
+    <Redirect to="/" />
+  ) : (
     <div className="login-page">
       <Form
         name="normal_login"
@@ -44,4 +72,4 @@ const loginForm: FC<Props> = () => {
   );
 };
 
-export default loginForm;
+export default LoginForm;
