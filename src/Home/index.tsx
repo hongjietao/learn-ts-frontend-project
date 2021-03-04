@@ -38,7 +38,15 @@ class Home extends Component {
     });
   };
 
-  handleCrowllerClick = () => {};
+  handleCrowllerClick = () => {
+    axios.get("api/getData").then(res=>{
+      if(res.data?.data){
+        message.success("爬取成功！")
+      } else {
+        message.error("爬取失败!")
+      }
+    })
+  };
 
   getOption: () => echarts.EChartsOption = () => {
     return {
